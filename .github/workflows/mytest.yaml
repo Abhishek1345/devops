@@ -1,4 +1,4 @@
-name:learning
+name: learning
 on:
   push:
    branches:
@@ -6,29 +6,30 @@ on:
 
 jobs:
  produce:
-  runs-on:ubuntu-24.04
+  runs-on: ubuntu-24.04
 
-  output:
-   name:${{steps.step1.outputs.name}}
+  outputs:
+   name: ${{steps.step1.outputs.name}}
   
   steps:
-   - name:first-step
-     id:step1
-     run:|
+   - name: first-step
+     id: step1
+     run: |
          name=abhishek;
          echo "name=$name" >> "$GITHUB_OUTPUT"
          echo "name=$name" >> "$GITHUB_ENV"
 
-    - name:second-step
-      run:|
+   - name: second-step
+      
+     run: |
           echo "name=$name"
           echo "name=${{steps.step1.outputs.name}}"
 
   consume:
-   runs-on:ubuntu-24.04
+   runs-on: ubuntu-24.04
 
-   needs:produce
+   needs: produce
    steps:
-    - name:consume-step
+    - name: consume-step
       run: |
            echo "${{needs.produce.outputs.name}}"
