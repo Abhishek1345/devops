@@ -20,12 +20,11 @@ jobs:
          echo "name=$name" >> "$GITHUB_ENV"
 
    - name: second-step
-      
      run: |
           echo "name=$name"
           echo "name=${{steps.step1.outputs.name}}"
 
-  consume:
+ consume:
    runs-on: ubuntu-24.04
 
    needs: produce
